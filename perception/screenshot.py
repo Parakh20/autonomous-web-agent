@@ -28,10 +28,8 @@ async def capture_annotated_screenshot(page: Page, elements: list[Element]) -> s
 
     Returns the annotated screenshot as a base64-encoded PNG string.
     """
-    # Mocking screenshot due to headless VM crash.
-    # raw_png = await page.screenshot(full_page=False)
-    # image = Image.open(io.BytesIO(raw_png)).convert("RGB")
-    image = Image.new("RGB", (800, 600), "white")
+    raw_png = await page.screenshot(full_page=False)
+    image = Image.open(io.BytesIO(raw_png)).convert("RGB")
     draw = ImageDraw.Draw(image)
     font = ImageFont.load_default()
 

@@ -38,3 +38,17 @@ async def test_save_screenshot_writes_png_file(browser_page, static_server, tmp_
     # Assert
     assert out_path.exists()
     assert out_path.stat().st_size > 0
+
+
+@pytest.mark.asyncio
+async def test_capture_annotated_screenshot_matches_real_viewport_size(browser_page, static_server):
+    # Arrange: browser_page uses a 1280x800 viewport (see conftest.py).
+    await browser_page.goto(f"{static_server}/sample_page.html")
+    elements = await extract_interactive_elements(browser_page)
+
+    # Act
+    b64 = await capture_annotated_screenshot(browser_page, elements)
+
+    # Assert: a real capture, not a placeholder canvas.
+    img = Image.open(io.BytesIO(base64.b64decode(b64)))
+    assert (img.width, img.height) == (1280, 800)
