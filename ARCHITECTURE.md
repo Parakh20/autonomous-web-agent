@@ -132,11 +132,6 @@ built the same way rather than pulling in a multi-agent framework.
 - **Ollama** defaults to `qwen2.5-coder:7b` and needs a local Ollama daemon;
   its tool-calling is unreliable on small models, so `OllamaLLM` also parses
   an inline-JSON fallback when `tool_calls` isn't populated.
-- **OCR** needs the `tesseract` binary + `pytesseract`; neither is installed
-  in this environment, so `perception/ocr.py` degrades to `""` rather than
-  failing perception.
-- **Screenshot capture** (`perception/screenshot.py`) was mocked out with a
-  blank image in this working tree before this session (comment: "Mocking
-  screenshot due to headless VM crash") — unrelated to this work, but it
-  means the agent is currently perceptually blind regardless of which LLM
-  answers. Worth fixing separately.
+- **OCR** needs the `tesseract` binary + `pytesseract`; when either is
+  missing, `perception/ocr.py` degrades to `""` rather than failing
+  perception.
