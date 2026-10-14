@@ -10,3 +10,7 @@ results/replays/
 *.egg-info/
 
 .superpowers/
+
+# Local AI-assistant planning artifacts
+docs/superpowers/
+.claude/
