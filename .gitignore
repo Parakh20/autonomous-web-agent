@@ -8,3 +8,5 @@ results/benchmark/
 results/replays/
 .pytest_cache/
 *.egg-info/
+
+.superpowers/
